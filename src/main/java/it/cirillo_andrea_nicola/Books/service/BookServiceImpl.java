@@ -3,7 +3,6 @@ package it.cirillo_andrea_nicola.Books.service;
 import it.cirillo_andrea_nicola.Books.entity.Book;
 import it.cirillo_andrea_nicola.Books.exception.BookNotFoundException;
 import it.cirillo_andrea_nicola.Books.repository.BookRepository;
-import it.cirillo_andrea_nicola.Books.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +26,15 @@ public class BookServiceImpl implements BookService {
             throw new BookNotFoundException("Libro con ISBN " + isbn + " non trovato");
         }
         return theBook;
+    }
+
+    @Override
+    public List<Book> findByAuthor(String author) {
+        List<Book> books = bookRepository.findByAuthor(author);
+        if (books.isEmpty()){
+            throw new BookNotFoundException("Nessun libro con autore " + author);
+        }
+        return books;
     }
 
 

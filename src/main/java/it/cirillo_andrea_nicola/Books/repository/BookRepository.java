@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     Book findByIsbn(Long isbn);
+    List<Book> findByAuthor(String author);
     void deleteByIsbn(Long isbn);
 }

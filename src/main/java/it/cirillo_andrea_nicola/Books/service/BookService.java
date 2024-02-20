@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface BookService {
     Book findByIsbn(Long isbn);
+    List<Book> findByAuthor(String author);
     List<Book> findAll();
     Book saveBook(Book book);
     Book updateBook(Long isbn, Book book);

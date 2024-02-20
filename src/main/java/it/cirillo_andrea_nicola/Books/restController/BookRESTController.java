@@ -35,7 +35,7 @@ public class BookRESTController {
     @PostMapping("/newBook")
     public ResponseEntity<Book> createBook(@Valid @RequestBody Book book) {
         Book savedBook = bookService.saveBook(book);
-        return ResponseEntity.status(HttpStatus.OK).body(savedBook);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
     @PutMapping("/updateBook/{isbn}")
@@ -49,7 +49,7 @@ public class BookRESTController {
     public ResponseEntity<String> deleteByIsbn(@PathVariable Long isbn) {
         try {
             bookService.deleteByIsbn(isbn);
-            return ResponseEntity.ok("Libro eliminato con successo");
+            return ResponseEntity.ok("Libro con ISBN: " + isbn + " eliminato con successo");
         }catch (BookNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
