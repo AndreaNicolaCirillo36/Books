@@ -32,5 +32,10 @@ build/
 ### VS Code ###
 .vscode/
 
-# Ignora i file di configurazione dell'applicazione
+# Escludi file di configurazione dell'applicazione
 application.properties
+
+# Escludi file di sistema macOS
+.DS_Store
+src/.DS_Store
+src/main/.DS_Store
