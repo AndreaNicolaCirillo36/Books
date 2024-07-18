@@ -16,7 +16,6 @@ public class BookMVCController {
 
     private final BookService bookService;
 
-
     @GetMapping("/home")
     public String listBooks(Model theModel){
 
@@ -30,14 +29,22 @@ public class BookMVCController {
     @GetMapping("/search")
     public String searchByIsbn(@RequestParam(value = "isbn", required = false) Long isbn, Model model) {
         if (isbn == null) {
-            return "redirect:/web/home";
+
+            model.addAttribute("error", "ISBN non può essere nullo. Inserisci un valore valido.");
+            return "books/home";
         }
 
-        Book books = bookService.findByIsbn(isbn);
+        Book book = bookService.findByIsbn(isbn);
 
-        model.addAttribute("books", books);
+        if (book == null) {
+            model.addAttribute("error", "Nessun libro trovato con l'ISBN fornito.");
+            return "books/home";
+        }
+
+        model.addAttribute("books", book);
         return "books/home";
     }
+
 
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel){

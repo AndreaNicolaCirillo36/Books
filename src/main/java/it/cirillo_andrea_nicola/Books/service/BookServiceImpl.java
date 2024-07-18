@@ -24,6 +24,7 @@ public class BookServiceImpl implements BookService {
         Book theBook = bookRepository.findByIsbn(isbn);
         if (theBook == null){
             throw new BookNotFoundException("Libro con ISBN " + isbn + " non trovato");
+            
         }
         return theBook;
     }
